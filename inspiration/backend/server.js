@@ -6,8 +6,18 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 4000;
+const allowedOrigins = ['https://inspirationcarmen.netlify.app'];
 
-app.use(cors());
+app.use(cors({
+    origin: function(origin, callback){
+        if(!origin) return callback(null, true);
+        if(allowedOrigins.indexOf(origin) === -1){
+            const msg = `The CORS policy for this site does not allow access from the specified Origin.`
+            return callback(new Error(msg), false)
+        }
+    return callback(null, true);
+    }
+}));
 
 let cachedQuote = null;
 let cacheTime = null;
