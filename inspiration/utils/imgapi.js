@@ -1,5 +1,5 @@
 export async function getImage(count = 5){
-    const url = `http://localhost:4000/photos/random?count=${count}`;
+    const url = `https://inspiration-production-a80b.up.railway.app/photos/random?count=${count}`;
     const response = await fetch(url)
 
     if(!response.ok) throw new Error ('Failed to fetch images')
