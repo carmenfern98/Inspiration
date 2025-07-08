@@ -57,6 +57,7 @@ app.get('/quote', async(req, res) =>{
 );
 
 app.get('/photos/random', async(req, res)=>{
+    res.set('Access-Control-Allow-Origin', 'https://inspirationcarmen.netlify.app')
     const accessKey= process.env.UNSPLASH_ACCESS_KEY;
     const count = req.query.count ||5;
     try{
