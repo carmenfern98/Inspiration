@@ -1,5 +1,5 @@
 export async function getQuote(){
-    const url = 'https://inspiration-production-a80b.up.railway.app/quote';
+    const url = 'https://inspiration-production-ef88.up.railway.app/quote';
     const response = await fetch(url);
 
     if(!response.ok) throw new Error('Failed to fetch quote')
