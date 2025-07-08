@@ -6,18 +6,14 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 4000;
-const allowedOrigins = ['https://inspirationcarmen.netlify.app'];
 
-app.use(cors({
-    origin: function(origin, callback){
-        if(!origin) return callback(null, true);
-        if(allowedOrigins.indexOf(origin) === -1){
-            const msg = `The CORS policy for this site does not allow access from the specified Origin.`
-            return callback(new Error(msg), false)
-        }
-    return callback(null, true);
-    }
-}));
+const corsOptions = {
+    origin: 'https://inspirationcarmen.netlify.app',
+    methods: ['GET'],
+    optionsSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
 
 let cachedQuote = null;
 let cacheTime = null;
@@ -57,7 +53,6 @@ app.get('/quote', async(req, res) =>{
 );
 
 app.get('/photos/random', async(req, res)=>{
-    res.set('Access-Control-Allow-Origin', 'https://inspirationcarmen.netlify.app')
     const accessKey= process.env.UNSPLASH_ACCESS_KEY;
     const count = req.query.count ||5;
     try{
